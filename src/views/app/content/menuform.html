@@ -1,0 +1,133 @@
+<div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list"
+  style="padding: 20px 30px 0 0;">
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单ID</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        {{# 
+          console.log('menu form');
+          console.log(d);
+        }}
+        <input type="number" name="id" value="{{ d.params.id || '' }}" {{d.params.id != null ? 'disabled' : '' }} lay-verify="required" placeholder="请输入菜单ID"
+          autocomplete="off" class="layui-input {{d.params.id != null ? 'layui-btn-disabled' : '' }}">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单名</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="menu_name" value="{{ d.params.menu_name || '' }}" lay-verify="required"
+          placeholder="请输入菜单名" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单显示</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" placeholder="请输入菜单显示"
+          autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单路径</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="menu_url" value="{{ d.params.menu_url || '' }}" lay-verify="required"
+          placeholder="请输入菜单路径" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">父级ID</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="parent_id" value="{{ d.params.parent_id || '' }}" lay-verify="required"
+          placeholder="请输入菜单名" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">级别</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <select name="level" lay-verify="required">
+          <option value="">请选择级别</option>
+          <option value="1" {{ d.params.level === 1 ? 'selected' : '' }}>一级菜单</option>
+          <option value="2" {{ d.params.level === 2 ? 'selected' : '' }}>二级菜单</option>
+          <option value="3" {{ d.params.level === 3 ? 'selected' : '' }}>三级菜单</option>
+        </select>
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">权限标识</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="text" name="permission" value="{{ d.params.permission || '' }}" lay-verify="required"
+          placeholder="请输入权限标识" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单图标</label>
+    <div class="layui-input-block">
+      <!-- <script type="text/html" template lay-url="http://localhost:8007/icon/tags" lay-done="layui.data.icon(d)">
+        {{#  
+          var icons = [];
+          if(d.data) {
+           icons = d.data;
+          }
+        }}
+        <select name="icon" id="">
+          <option value="">请选择图标</option>
+          {{#  layui.each(icons, function(index, item){ }}
+          <option value="item.id"
+            {{ (d.params.icons && d.params.icons.indexOf(item.icon_name) != -1) ? 'selected' : '' }}>{{item.icon_name}}
+          </option>
+          {{#  }); }}
+        </select>
+
+        {{#  layui.each(icons, function(index, item){ }}
+        <input type="checkbox" name="icons-{{item.icon_name}}-{{item.id}}" lay-skin="primary" title={{item.icon_name}}
+          {{ (d.params.icons && d.params.icons.indexOf(item.icon_name) != -1) ? 'checked' : '' }}>
+        {{#  }); }}
+      </script> -->
+    </div>
+  </div>
+
+
+
+  <script>
+    layui.data.icon = (d) => {
+      console.log('menuform');
+
+      layui.use(['form'], function () {
+        var form = layui.form;
+        form.render(null, 'layuiadmin-app-form-list'); //渲染该模板下的动态表单
+      });
+
+    }
+  </script>
+
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">审核状态</label>
+    <div class="layui-input-inline">
+      <input type="checkbox" lay-verify="required" lay-filter="status" name="status" lay-skin="switch"
+        lay-text="已启用|待启用">
+    </div>
+  </div>
+  <!-- <script type="text/html" template>
+    <input type="hidden" name="Authorization" value="{{ '' }}">
+  </script> -->
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-inline">
+      <input type="button" lay-submit lay-filter="layuiadmin-app-form-submit" value="确认" class="layui-btn">
+    </div>
+  </div>
+</div>
